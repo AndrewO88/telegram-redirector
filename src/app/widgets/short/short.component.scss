@@ -1,0 +1,16 @@
+.container {
+  .content-container {
+    border: 1px solid deeppink;
+    width: 40%;
+  }
+  .header-container {
+    border: 1px solid deeppink;
+    width: 60%;
+    .header-description {
+      font-size: 15px;
+      color: #656565;
+      padding-right: 40px;
+      padding-left: 40px;
+    }
+  }
+}

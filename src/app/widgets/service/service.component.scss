@@ -5,6 +5,11 @@
 .header-wrap {
   padding-left: 60px;
   padding-right: 60px;
+  .header-description {
+    padding-bottom: 40px;
+    font-size: 15px;
+    color: #656565;
+  }
 }
 .content-container {
   border: 1px solid green;
