@@ -7,4 +7,26 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  display: flex;
+  flex-direction: column;
+ align-items: center;
+}
+.container {
+  min-width: 1000px;
+  max-width: 1200px;
+  padding: 10px;
+  display: flex;
+  .header-container {
+    .header-title {
+      padding: 50px 0 20px 0;
+      text-align: center;
+      font-size: 35px;
+      color: #4c4c4c;
+    }
+  }
+  .content-container {
+    .content-container-item-container {
+      display: flex;
+    }
+  }
 }
