@@ -1,0 +1,38 @@
+.redirector {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+
+  .link {
+
+    .link-anchor {
+      font-size: 1.2rem;
+      height: 54px;
+      line-height: 54px;
+      padding: 0 40px;
+      color: #333;
+      background: #fff;
+    }
+  }
+
+  .info {
+    margin: 50px 30px 0;
+    background: #575757;
+
+    a {
+      text-decoration: none;
+    }
+
+    .text-color1 {
+      color: #ffd26b;
+      font-size: 1rem;
+    }
+
+    .text-color2 a {
+      color: #8fc7ff;
+      font-size: 1rem;
+    }
+  }
+}
+
