@@ -1,0 +1,10 @@
+.redirect-container {
+  display: flex;
+  justify-content: center;
+
+  .tabs-wrap {
+    display: flex;
+    margin: 40px;
+    max-width: 400px;
+  }
+}

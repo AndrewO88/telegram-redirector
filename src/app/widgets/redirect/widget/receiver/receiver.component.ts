@@ -6,8 +6,7 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
   selector: 'app-receiver',
   template: `
     <div *ngIf="isReceiver" class="receive">
-      <img class="img" src="assets/img/img.png" alt="Smart Link!"/>
-      <h1 class="title">Генерация ссылки</h1>
+      <h1 class="title">Переадресация в Telegram</h1>
       <div class="sub-title">
         Введите ссылку в формате t.me/login или @login
       </div>

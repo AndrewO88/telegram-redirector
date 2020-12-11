@@ -12,21 +12,33 @@ interface ViewModel {
 @Component({
   selector: 'app-redirect',
   template: `
-    <div class="container">
-      <div *ngIf="viewModel as view" class="container">
+    <div class="redirect-container">
 
-        <ng-container *ngIf="view.isReceive; else forward">
-          <app-receiver></app-receiver>
-        </ng-container>
+      <div class="tabs-wrap">
+        <mat-tab-group animationDuration="0ms" mat-align-tabs="center">
+          <mat-tab label="Без регистрации">
+            <div *ngIf="viewModel as view">
 
-        <ng-template #forward>
-          <app-redirector [redirectLink]="view.redirectLink"></app-redirector>
-        </ng-template>
+              <ng-container *ngIf="view.isReceive; else forward">
+                <app-receiver></app-receiver>
+              </ng-container>
 
+              <ng-template #forward>
+                <app-redirector [redirectLink]="view.redirectLink"></app-redirector>
+              </ng-template>
+
+            </div>
+          </mat-tab>
+          <mat-tab label="С регистрацией">
+
+          </mat-tab>
+        </mat-tab-group>
       </div>
+
+
     </div>
   `,
-  styles: [],
+  styleUrls: ['redirect.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RedirectComponent implements OnInit {

@@ -14,6 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {RedirectModule} from './widgets/redirect/redirect.module';
+import {RoutingModule} from './routing/routing.module';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {RedirectModule} from './widgets/redirect/redirect.module';
     MatButtonModule,
     MatBadgeModule,
     MatToolbarModule,
-    RedirectModule
+    RedirectModule,
+    RoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

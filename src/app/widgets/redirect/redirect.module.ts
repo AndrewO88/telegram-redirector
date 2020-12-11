@@ -9,6 +9,9 @@ import {RedirectorComponent} from './widget/redirector/redirector.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 @NgModule({
@@ -21,7 +24,9 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatCardModule
+    MatCardModule,
+    MatInputModule,
+    MatTabsModule
   ]
 })
 export class RedirectModule {
