@@ -28,7 +28,7 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
           mat-raised-button
           (click)="handleUrl()"
         >
-          Получить адрес
+          Получить ссылку
         </button>
       </div>
     </div>
