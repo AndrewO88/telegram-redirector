@@ -1,5 +1,4 @@
 ::ng-deep .mat-form-field-infix {
-  min-width: 240px !important;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
@@ -20,6 +19,10 @@
   border-bottom: 1px solid rgba(0, 0, 0, .12) !important;
 }
 
+::ng-deep .mat-tab-label {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
 .receive {
   display: flex;
   text-align: center;
@@ -33,10 +36,18 @@
   }
 
   .title {
-    font-family: sans-serif;
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 0;
+    font-size: 40px;
+    font-weight: 600;
+    margin: 40px 0 10px 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #3f4452;
+  }
+
+  @media (max-width: 500px) {
+    .title {
+      font-size: 30px;
+      line-height: 1.6;
+    }
   }
 
   .sub-title {
