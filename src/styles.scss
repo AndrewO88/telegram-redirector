@@ -11,9 +11,13 @@ body {
   flex-direction: column;
  align-items: center;
 }
-.container {
+.wrapper {
   min-width: 1000px;
   max-width: 1200px;
+  display: flex;
+}
+.container {
+  width: 100%;
   padding: 10px;
   display: flex;
   .header-container {
