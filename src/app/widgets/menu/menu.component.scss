@@ -1,6 +1,17 @@
-.logo {
-  background: url(/assets/images/i-logo-0c481ff0d4997abe6ccf5e020223d249cf833a73a31065dd4606bc0db3fbb728.svg) center no-repeat;
-  background-size: contain;
-  width: 100px;
-  height: 30px;
+.horizontal-menu {
+  background: red;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0;
+
+    .logo {
+      background: url('/assets/images/logo.svg') center no-repeat;
+      background-size: contain;
+      width: 100px;
+      height: 30px;
+    }
+  }
+
 }
