@@ -43,10 +43,16 @@
     color: #3f4452;
   }
 
+  .title {
+    font-size: 40px;
+    font-weight: 600;
+    margin: 40px 0 10px 0;
+    line-height: 1.6;
+  }
+
   @media (max-width: 500px) {
     .title {
       font-size: 30px;
-      line-height: 1.6;
     }
   }
 
