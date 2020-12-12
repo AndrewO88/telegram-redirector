@@ -59,7 +59,8 @@ export class RedirectComponent implements OnInit {
     const info = currentPathname.split('/');
 
     this.viewModel = {
-      isReceive: !info.filter(part => !!part).length,
+      isReceive: true,
+      // isReceive: !info.filter(part => !!part).length,
       currentPathname: location.pathname,
       rootPathname: '/',
       redirectLink: this.sanitizer.bypassSecurityTrustUrl(buildLink(info))
