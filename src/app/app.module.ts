@@ -15,6 +15,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {RedirectModule} from './widgets/redirect/redirect.module';
 import {RoutingModule} from './routing/routing.module';
+import {TrustComponent} from './widgets/trust/trust.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {RoutingModule} from './routing/routing.module';
     ShortComponent,
     ExamplesComponent,
     FooterComponent,
-    MenuComponent
+    MenuComponent,
+    TrustComponent
   ],
   imports: [
     BrowserModule,
