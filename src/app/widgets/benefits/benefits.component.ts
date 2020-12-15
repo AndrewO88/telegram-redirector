@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CheckService, Person} from '../../srv/check.service';
 
 @Component({
   selector: 'app-benefits',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./benefits.component.scss']
 })
 export class BenefitsComponent implements OnInit {
-
-  constructor() { }
+ testPerson: Person  = {
+   id : 'kek',
+ };
+  constructor(private checkSrv: CheckService) { }
 
   ngOnInit(): void {
   }
 
+  onLoad(): void {
+    this.checkSrv.load(this.testPerson).subscribe((res)=> {
+      console.log(res);
+    });
+  }
+
+  onCheck(): void {
+    this.checkSrv.check(this.testPerson).subscribe((res)=> {
+      console.log(res);
+    });
+  }
 }

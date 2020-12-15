@@ -16,7 +16,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {RedirectModule} from './widgets/redirect/redirect.module';
 import {RoutingModule} from './routing/routing.module';
 import {TrustComponent} from './widgets/trust/trust.component';
-
+import {HttpClientModule} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,11 @@ import {TrustComponent} from './widgets/trust/trust.component';
     MatBadgeModule,
     MatToolbarModule,
     RedirectModule,
-    RoutingModule
+    RoutingModule,
+    HttpClientModule,
+    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
