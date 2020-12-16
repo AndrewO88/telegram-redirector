@@ -1,6 +1,8 @@
 import {Routes} from '@angular/router';
-import {AppComponent} from '../app.component';
+import {BenefitsComponent} from '../widgets/benefits/benefits.component';
+import {MainPageComponent} from '../widgets/_main-page/main-page/main-page.component';
 
 export const appRoutes: Routes = [
-  // {path: '**', component: AppComponent},
+  {path: 'profile', component: BenefitsComponent},
+  {path: '', component: MainPageComponent},
 ];

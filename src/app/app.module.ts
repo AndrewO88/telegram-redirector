@@ -20,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {MainPageComponent} from './widgets/_main-page/main-page/main-page.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
     ExamplesComponent,
     FooterComponent,
     MenuComponent,
-    TrustComponent
+    TrustComponent,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,
