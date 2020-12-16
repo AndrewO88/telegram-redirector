@@ -21,15 +21,8 @@ export class CheckService {
   }
 
 
-  check(person: Person): Observable<AnswerPerson | false> {
-    return this.http
-      .get<AnswerPerson>(`${CheckService.url}/${person.link}.json`)
-      .pipe(map(response => {
-        if (!response) {
-          return false;
-        }
-        return response;
-      }));
+  check(person: Person): Observable<AnswerPerson> {
+    return this.http.get<AnswerPerson>(`${CheckService.url}/${person.link}.json`);
   }
 
   create(person: Person): Observable<Person> {

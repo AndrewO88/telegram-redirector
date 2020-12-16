@@ -32,7 +32,7 @@ export class BenefitsComponent implements OnInit {
     $event.preventDefault();
 
     this.checkSrv.check(this.testPerson).pipe(
-      filter((p: AnswerPerson | boolean) => !!p),
+      filter((p) => !!p),
       switchMap((person: AnswerPerson) => this.checkSrv.increaseCount(getId(person)[1], getId(person)[0])),
     ).subscribe((res) => {
       console.log(res.count);
