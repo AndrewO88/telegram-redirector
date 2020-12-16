@@ -5,11 +5,12 @@ import {Observable} from 'rxjs';
 
 
 export interface Person {
-  id: string;
-  date?: string;
+  link: string;
+  count: number;
 }
-interface CreateResponse {
-  id: string;
+
+export interface AnswerPerson {
+  [key: string]: Person;
 }
 
 @Injectable({providedIn: 'root'})
@@ -20,9 +21,9 @@ export class CheckService {
   }
 
 
-  check(person: Person): Observable<Person | false> {
+  check(person: Person): Observable<AnswerPerson | false> {
     return this.http
-      .get<Person>(`${CheckService.url}/${person.id}.json`)
+      .get<AnswerPerson>(`${CheckService.url}/${person.link}.json`)
       .pipe(map(response => {
         if (!response) {
           return false;
@@ -31,24 +32,18 @@ export class CheckService {
       }));
   }
 
-  load2(person: Person): Observable<Person[]> {
-    console.log('lel');
+  create(person: Person): Observable<Person> {
     return this.http
-      .get<Person[]>(`${CheckService.url}/${person}.json`)
-      .pipe(map(response => {
-        if (!response) {
-          console.log(response);
-          return [];
-        }
-        console.log(response);
-        return response;
-      }));
-  }
-
-  load(person: Person): Observable<Person> {
-    return this.http
-      .post<CreateResponse>(`${CheckService.url}/${person.id}.json`, person);
+      .post<Person>(`${CheckService.url}/${person.link}.json`, person);
 
   }
 
+  increaseCount(person: Person, id: string): Observable<Person> {
+    let count = +person.count;
+    count++;
+    return this.http.patch<Person>(`${CheckService.url}/${person.link}/${id}.json`, {
+      ...person,
+      count
+    });
+  }
 }
