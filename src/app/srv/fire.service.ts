@@ -1,26 +1,10 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, QueryDocumentSnapshot, SnapshotOptions} from '@angular/fire/firestore';
+import {AngularFirestore} from '@angular/fire/firestore';
 import {Link} from '../widgets/prof/prof.component';
 import {Observable} from 'rxjs';
-import {map, mapTo, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {DocumentReference} from '@angular/fire/firestore/interfaces';
 
-// Firestore data converter
-const linkConverter = {
-  toFirestore: (link: Link) => {
-    return {
-      name: link.link,
-      count: link.count,
-    };
-  },
-  fromFirestore: (snapshot: QueryDocumentSnapshot<any>, options: SnapshotOptions) => {
-    const data = snapshot.data(options);
-    return {
-      name: data.link,
-      count: data.count,
-    };
-  }
-};
 
 @Injectable({
   providedIn: 'root'
