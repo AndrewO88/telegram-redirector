@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { CheckService, Person} from '../../srv/check.service';
+
 import {filter, switchMap, tap} from 'rxjs/operators';
 
 
@@ -11,7 +11,7 @@ import {filter, switchMap, tap} from 'rxjs/operators';
 export class BenefitsComponent implements OnInit {
 
 
-  constructor(private checkSrv: CheckService) {
+  constructor() {
   }
 
   ngOnInit(): void {

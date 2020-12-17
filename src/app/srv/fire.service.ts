@@ -19,7 +19,7 @@ export class FireService {
           console.log('2', person);
           return {
             id: person.payload.doc.id,
-            link: person.payload.doc.data().link
+            // link: person.payload.doc.data().link
           } as PersonTest;
         });
       })

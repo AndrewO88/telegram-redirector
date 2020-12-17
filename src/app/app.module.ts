@@ -19,7 +19,6 @@ import {TrustComponent} from './widgets/trust/trust.component';
 import {HttpClientModule} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {AngularFireModule} from '@angular/fire';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {MainPageComponent} from './widgets/_main-page/main-page/main-page.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -40,7 +39,6 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
     MenuComponent,
     TrustComponent,
     MainPageComponent,
-    SubDialogComponent,
     ProfComponent
   ],
   imports: [
