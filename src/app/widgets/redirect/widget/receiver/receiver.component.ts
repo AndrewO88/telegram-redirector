@@ -5,33 +5,15 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 @Component({
   selector: 'app-receiver',
   template: `
-    <div *ngIf="isReceiver" class="receive">
-      <h1 class="title">Переадресация в Telegram</h1>
-      <div class="sub-title">
-        Введите ссылку в формате t.me/login или @login
-      </div>
-      <div class="input-container">
-        <mat-form-field
-          appearance="outline"
-          color="primary"
-        >
-          <mat-label>t.me/.. telegra.ph/..</mat-label>
-          <input [(ngModel)]="inputUrl" #inputRef matInput placeholder="t.me/.." required autofocus>
-        </mat-form-field>
-        <button class="copy" [cdkCopyToClipboard]="!!inputUrl ? inputUrl : ''" mat-icon-button aria-label="Скопировать в буффер обмена">
-          <mat-icon class="icon">file_copy</mat-icon>
-        </button>
-
-      </div>
-      <div class="button-container">
-        <button
-          mat-raised-button
-          (click)="handleUrl()"
-        >
-          Получить ссылку
-        </button>
+    <div *ngIf="isReceiver" class="receive form">
+      <div class="free"><h1 class="free__title">Переадресация в Telegram</h1>
+        <div class="free__info">На паблики, профили, чаты, сообщения, стикеры в Telegram</div>
+        <div class="free__text"><input class="free__input" placeholder="Вставьте ссылку t.me" type="text"><a class="free__button"
+                                                                                                             href="javascript:;">Получить
+          ссылку</a></div>
       </div>
     </div>
+
   `,
   styleUrls: ['./receiver.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
