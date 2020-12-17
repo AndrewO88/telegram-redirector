@@ -25,8 +25,11 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
-import { ProfComponent } from './widgets/prof/prof.component';
+import {ProfComponent} from './widgets/prof/prof.component';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
+import {NewLinkComponent} from './widgets/prof/new-link/new-link.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
     MenuComponent,
     TrustComponent,
     MainPageComponent,
-    ProfComponent
+    ProfComponent,
+    NewLinkComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +62,9 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

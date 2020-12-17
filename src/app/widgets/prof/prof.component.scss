@@ -1,0 +1,49 @@
+:host {
+  display: flex;
+  height: calc(100vh - 90px - 80px);
+  justify-content: center;
+  //align-items: center;
+  margin-top: 20px;
+}
+
+
+
+.links .w {
+  display: flex;
+  align-items: center;
+  width: 1000px;
+
+  .links-table {
+    width: 90%;
+  }
+}
+
+@media (max-width: 1250px) {
+  .w {
+    width: 1000px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .w {
+    width: 90%;
+  }
+}
+
+@media (max-width: 800px) {
+  .links {
+    width: 100%;
+  }
+
+  .links .w {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .w {
+    width: 95%;
+  }
+}
+

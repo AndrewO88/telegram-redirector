@@ -1,8 +1,26 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
-import {PersonTest} from '../widgets/prof/prof.component';
+import {AngularFirestore, QueryDocumentSnapshot, SnapshotOptions} from '@angular/fire/firestore';
+import {Link} from '../widgets/prof/prof.component';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, mapTo, tap} from 'rxjs/operators';
+import {DocumentReference} from '@angular/fire/firestore/interfaces';
+
+// Firestore data converter
+const linkConverter = {
+  toFirestore: (link: Link) => {
+    return {
+      name: link.link,
+      count: link.count,
+    };
+  },
+  fromFirestore: (snapshot: QueryDocumentSnapshot<any>, options: SnapshotOptions) => {
+    const data = snapshot.data(options);
+    return {
+      name: data.link,
+      count: data.count,
+    };
+  }
+};
 
 @Injectable({
   providedIn: 'root'
@@ -12,29 +30,20 @@ export class FireService {
   constructor(private firestore: AngularFirestore) {
   }
 
-  getPersons(token: string): Observable<PersonTest[]> {
-    return this.firestore.collection(`persons/${token}/links`).snapshotChanges().pipe(
-      map((data) => {
-        return data.map(person => {
-          console.log('2', person);
-          return {
-            id: person.payload.doc.id,
-            // link: person.payload.doc.data().link
-          } as PersonTest;
-        });
-      })
+  getPersonLinks(personId: string): Observable<Link[]> {
+    return this.firestore.collection(`persons/${personId}/links`).snapshotChanges().pipe(
+      map<any, Link[]>((data) => data.map((link: any) => ({
+        ...link.payload.doc.data() as object,
+        id: link.payload.doc.id,
+      })))
     );
   }
 
-  createPerson(person: PersonTest) {
-    return this.firestore.collection('persons').add(person);
+  createPerson(link: Partial<Link>, personId: string): Promise<DocumentReference<any>> {
+    return this.firestore.collection(`persons/${personId}/links`).add(link);
   }
 
-  updatePerson(person: PersonTest) {
-    this.firestore.doc('persons/' + person.id).update(person).then(r => console.log(r));
-  }
-
-  deletePerson(personId: string, token: string) {
-    this.firestore.doc(`persons/${token}/links/${personId}`).delete().then(r => console.log(r));
+  deletePerson(linkId: string, personId: string): Promise<void> {
+    return this.firestore.doc(`persons/${personId}/links/${linkId}`).delete();
   }
 }
