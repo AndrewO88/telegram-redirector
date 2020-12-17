@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {DataTest} from '../widgets/profiles/profiles.component';
+import {DataTest, Link} from '../widgets/profiles/profiles.component';
 
 export interface Person {
   token: string;
@@ -15,8 +15,8 @@ export class CheckService {
   }
 
 
-  get(person: Person): Observable<any> {
-    return this.http.get<any>(`${CheckService.url}/${person.token}.json`);
+  get(person: Person): Observable<{ [key: string]: Link }> {
+    return this.http.get<{ [key: string]: Link }>(`${CheckService.url}/${person.token}.json`);
   }
 
   create(person: Person, data: DataTest): Observable<Person> {

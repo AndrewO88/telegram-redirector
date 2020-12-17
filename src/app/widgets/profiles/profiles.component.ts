@@ -1,11 +1,17 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {filter, map, switchMap} from 'rxjs/operators';
-import { CheckService, Person} from '../../srv/check.service';
-import {getId} from '../../srv/heplers';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
+import {CheckService, Person} from '../../srv/check.service';
+
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+
 
 export interface DataTest {
+  link: string;
+  count: number;
+}
+
+export interface Link {
   link: string;
   count: number;
 }
@@ -13,26 +19,42 @@ export interface DataTest {
 @Component({
   selector: 'app-profiles',
   templateUrl: './profiles.component.html',
-  styleUrls: ['./profiles.component.scss']
+  styleUrls: ['./profiles.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfilesComponent implements OnInit {
 
 
-  constructor(private checkSrv: CheckService, public dialog: MatDialog) {
+  constructor(
+    private checkSrv: CheckService,
+    public dialog: MatDialog,
+    private crd: ChangeDetectorRef
+    ) {
   }
+
   testPerson: Person = {
     token: 'pok',
   };
-  links$: any[] = [];
+  links: [string, Link][] | undefined;
 
   ngOnInit(): void {
-  }
-  check(): void {
-    this.checkSrv.get(this.testPerson).subscribe((links) => {
-      this.links$ = Object.keys(links);
-      console.log(this.links$);
+    this.checkSrv.get(this.testPerson).pipe(
+      map((item) => Object.entries(item))
+    ).subscribe((response) => {
+      this.links = response;
+
+      this.crd.detectChanges();
     });
   }
+
+
+  check(): void {
+    // this.checkSrv.get(this.testPerson).subscribe((links) => {
+    //   this.links$ = Object.values(links);
+    //   console.log(this.links$);
+    // });
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(SubDialogComponent, {
       width: '250px',
@@ -55,7 +77,13 @@ export class ProfilesComponent implements OnInit {
 
   onDelete(link: any): void {
     this.checkSrv.remove(this.testPerson, link).subscribe((res) => {
-      console.log(res);
+      this.checkSrv.get(this.testPerson).pipe(
+        map((item) => Object.entries(item))
+      ).subscribe((response) => {
+        this.links = response;
+        this.crd.detectChanges();
+
+      });
     });
   }
 }

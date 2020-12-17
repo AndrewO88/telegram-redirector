@@ -2,8 +2,8 @@
   <div class="tabs-wrap">
     <div  class="profile">
       <button  (click)="openDialog()">добавить</button>
-      <button (click)="check()">призвать  со второго раза</button>
-      <div *ngFor="let link of links$" class="test-wrap">
+<!--      <button (click)="check()">призвать  со второго раза</button>-->
+      <div *ngFor="let link of links" class="test-wrap">
         <div class="test">{{link}} <button (click)="onDelete(link)">удалить</button></div>
       </div>
     </div>
