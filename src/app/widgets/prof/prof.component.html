@@ -1,0 +1,22 @@
+<table>
+  <thead>
+  <th>id</th>
+  <th>link</th>
+  <th>token</th>
+  <th>count</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let p of stream$ | async">
+
+    <td>{{p.id}}</td>
+    <td>{{p.link}}</td>
+    <td>{{p.token}}</td>
+    <td>{{p.count}}</td>
+    <td>
+      <button (click)="delete(p.id, person.token)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<button (click)="create()">create</button>
+<button (click)="update()">update</button>
