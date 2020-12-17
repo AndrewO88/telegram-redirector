@@ -10,7 +10,7 @@ import {getId} from '../../srv/heplers';
 })
 export class BenefitsComponent implements OnInit {
   testPerson: Person = {
-    link: 'lol',
+    token: 'lol',
     count: 0
   };
 
@@ -20,11 +20,11 @@ export class BenefitsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onLoad(): void {
-    this.checkSrv.create(this.testPerson).subscribe((res) => {
-      console.log(res);
-    });
-  }
+  // onLoad(): void {
+  //   this.checkSrv.create(this.testPerson).subscribe((res) => {
+  //     console.log(res);
+  //   });
+  // }
 
 
   onCheck($event: MouseEvent): void {

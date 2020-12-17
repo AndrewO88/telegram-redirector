@@ -1,16 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-
+import {DataTest} from '../widgets/profiles/profiles.component';
 
 export interface Person {
-  link: string;
-  count: number;
-}
-
-export interface AnswerPerson {
-  [key: string]: Person;
+  token: string;
 }
 
 @Injectable({providedIn: 'root'})
@@ -21,22 +15,29 @@ export class CheckService {
   }
 
 
-  check(person: Person): Observable<AnswerPerson> {
-    return this.http.get<AnswerPerson>(`${CheckService.url}/${person.link}.json`);
+  get(person: Person): Observable<any> {
+    return this.http.get<any>(`${CheckService.url}/${person.token}.json`);
   }
 
-  create(person: Person): Observable<Person> {
+  create(person: Person, data: DataTest): Observable<Person> {
     return this.http
-      .post<Person>(`${CheckService.url}/${person.link}.json`, person);
+      .post<Person>(`${CheckService.url}/${person.token}.json`, data);
 
   }
 
-  increaseCount(person: Person, id: string): Observable<Person> {
-    let count = +person.count;
-    count++;
-    return this.http.patch<Person>(`${CheckService.url}/${person.link}/${id}.json`, {
-      ...person,
-      count
-    });
+  remove(person: Person, id: string): Observable<Person> {
+    console.log(person);
+    console.log(id);
+    return this.http
+      .delete<Person>(`${CheckService.url}/${person.token}/${id}.json`);
   }
+
+  // increaseCount(person: Person, id: string): Observable<Person> {
+  //   let count = +person.count;
+  //   count++;
+  //   return this.http.patch<Person>(`${CheckService.url}/${person.token}/${id}.json`, {
+  //     ...person,
+  //     count
+  //   });
+// }
 }

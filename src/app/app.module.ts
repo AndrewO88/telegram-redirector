@@ -21,6 +21,12 @@ import {environment} from 'src/environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {MainPageComponent} from './widgets/_main-page/main-page/main-page.component';
+import {ProfilesComponent, SubDialogComponent} from './widgets/profiles/profiles.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +38,9 @@ import {MainPageComponent} from './widgets/_main-page/main-page/main-page.compon
     FooterComponent,
     MenuComponent,
     TrustComponent,
-    MainPageComponent
+    MainPageComponent,
+    ProfilesComponent,
+    SubDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +54,12 @@ import {MainPageComponent} from './widgets/_main-page/main-page/main-page.compon
     HttpClientModule,
     AngularFireModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
