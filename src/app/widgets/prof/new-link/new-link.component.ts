@@ -5,18 +5,37 @@ import {Link} from '../prof.component';
 @Component({
   selector: 'app-link-dialog-component',
   template: `
-    <h1 mat-dialog-title></h1>
-    <div mat-dialog-content>
-      <p>enter chto-to?</p>
-      <mat-form-field>
-        <mat-label>eshe chto-to</mat-label>
-        <input matInput [(ngModel)]="data.link">
-      </mat-form-field>
+    <div class="wrap">
+      <h1 mat-dialog-title>Введите название ссылки</h1>
+      <div mat-dialog-content>
+        <mat-form-field class="inp">
+          <mat-label>название ссылки</mat-label>
+          <input matInput [(ngModel)]="data.link">
+        </mat-form-field>
+      </div>
+      <div mat-dialog-actions class="act">
+        <button mat-button (click)="onNoClick()">Отмена</button>
+        <button mat-button [mat-dialog-close]="data.link">Создать</button>
+      </div>
     </div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">No Thanks</button>
-      <button mat-button [mat-dialog-close]="data.link">Ok</button>
-    </div>`,
+  `,
+  styles: [`
+    .wrap {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+    }
+    .inp {
+      display: flex;
+      justify-content: center;
+    }
+    .act {
+      display: flex;
+      justify-content: space-between;
+    }
+  `]
 })
 export class NewLinkComponent {
   constructor(

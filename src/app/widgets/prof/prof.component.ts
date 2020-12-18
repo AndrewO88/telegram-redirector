@@ -35,8 +35,6 @@ export class ProfComponent implements OnDestroy {
 
   create(): void {
     const dialogRef = this.dialog.open(NewLinkComponent, {
-      height: '400px',
-      width: '600px',
       data: {}
     });
 
