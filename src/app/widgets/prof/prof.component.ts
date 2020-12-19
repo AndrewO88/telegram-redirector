@@ -3,14 +3,13 @@ import {FireService} from '../../srv/fire.service';
 import {Observable, Subscription} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {NewLinkComponent} from './new-link/new-link.component';
-import {tap} from 'rxjs/operators';
 
 
 export interface Link {
   id: string;
   count: number;
   link: string;
-  background: any;
+  background?: any;
 }
 
 
@@ -24,7 +23,7 @@ export class ProfComponent implements OnDestroy {
   @Input() userId = 'dvach';
   @Input() personName = 'Юнный грешник';
   links$: Observable<Link[]>;
-  displayedColumns: string[] = ['link', 'count', 'actions'];
+  displayedColumns: string[] = ['link', 'count', 'metrics', 'actions'];
 
   private subscriptions: Subscription[] = [];
 
@@ -42,9 +41,7 @@ export class ProfComponent implements OnDestroy {
     });
 
     this.subscriptions.push(
-      dialogRef.afterClosed().pipe(
-        tap((res) => console.log('111', res))
-      ).subscribe((link) => {
+      dialogRef.afterClosed().subscribe((link) => {
         if (link) {
           const newLink: Partial<Link> = {
             count: 0,
