@@ -30,6 +30,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {NewLinkComponent} from './widgets/prof/new-link/new-link.component';
+import {RegistrationComponent} from './widgets/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {NewLinkComponent} from './widgets/prof/new-link/new-link.component';
     TrustComponent,
     MainPageComponent,
     ProfComponent,
-    NewLinkComponent
+    NewLinkComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

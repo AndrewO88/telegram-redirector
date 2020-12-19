@@ -6,14 +6,14 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
   selector: 'app-receiver',
   template: `
     <div *ngIf="isReceiver" class="receive form">
-      <div class="free"><h1 class="free__title">Переадресация в Telegram</h1>
+      <div class="free">
+        <h1 class="free__title">Переадресация в Telegram</h1>
         <div class="free__info">На паблики, профили, чаты, сообщения, стикеры в Telegram</div>
-        <div class="free__text"><input class="free__input" placeholder="Вставьте ссылку t.me" type="text"><a class="free__button"
-                                                                                                             href="javascript:;">Получить
-          ссылку</a></div>
+        <div class="free__text">
+          <input [(ngModel)]="inputUrl" class="free__input" placeholder="Вставьте ссылку t.me" type="text">
+          <a class="free__button" (click)="handleUrl($event)" href="#">Получить ссылку</a></div>
       </div>
     </div>
-
   `,
   styleUrls: ['./receiver.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -27,9 +27,14 @@ export class ReceiverComponent {
   ) {
   }
 
-  handleUrl(): void {
+  handleUrl($event: MouseEvent): void {
+    $event.stopPropagation();
+    $event.preventDefault();
+
     new Promise<string>((resolve, reject) => {
       let url = this.inputUrl;
+
+      console.log('handleUrl', url);
 
       if (!url) {
         reject('Error');
@@ -60,8 +65,3 @@ export class ReceiverComponent {
   }
 
 }
-
-
-
-
-
