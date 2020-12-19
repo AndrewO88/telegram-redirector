@@ -13,7 +13,7 @@ import {ILink} from '../../../model/link';
           <input type="text" matInput [(ngModel)]="data.url" name="link" #link="ngModel" required url>
         </mat-form-field>
         <div class="inp-wrap">
-          <input class="margin-input" type="file" (change)="handleUpload($event)">
+          <input class="margin-input" type="file" (change)="backgroundUpload($event)">
         </div>
       </div>
       <div mat-dialog-actions class="act">
@@ -58,7 +58,7 @@ export class NewLinkComponent {
     this.dialogRef.close();
   }
 
-  handleUpload(event: any): void {
+  backgroundUpload(event: any): void {
     const file = event?.target?.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
