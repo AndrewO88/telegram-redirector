@@ -12,6 +12,7 @@
   display: flex;
   align-items: center;
   width: 1000px;
+  flex-direction: column;
 
   .links-table {
     width: 90%;
@@ -46,4 +47,18 @@
     width: 95%;
   }
 }
-
+.actions {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.info {
+  h1 {
+    margin: 0;
+  }
+  h2 {
+    margin: 0;
+  }
+  .btn {
+  }
+}
