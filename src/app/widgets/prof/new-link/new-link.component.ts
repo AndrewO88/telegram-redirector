@@ -9,13 +9,13 @@ import {Link} from '../prof.component';
       <h1 mat-dialog-title>Введите название ссылки</h1>
       <div mat-dialog-content>
         <mat-form-field class="inp">
-          <mat-label>название ссылки</mat-label>
-          <input matInput [(ngModel)]="data.link">
+          <mat-label *ngIf="link.errors?.url">не верный формат ссылки</mat-label>
+          <input type="text" matInput [(ngModel)]="data.link" name="link" #link="ngModel" required url>
         </mat-form-field>
       </div>
       <div mat-dialog-actions class="act">
         <button mat-button (click)="onNoClick()">Отмена</button>
-        <button mat-button [mat-dialog-close]="data.link">Создать</button>
+        <button mat-button [mat-dialog-close]="data.link" [disabled]="!link.control.value || link.errors?.url">Создать</button>
       </div>
     </div>
   `,
