@@ -8,14 +8,17 @@ import {Link} from '../prof.component';
     <div class="wrap">
       <h1 mat-dialog-title>Введите название ссылки</h1>
       <div mat-dialog-content>
-        <mat-form-field class="inp">
-          <mat-label *ngIf="link.errors?.url">не верный формат ссылки</mat-label>
-          <input type="text" matInput [(ngModel)]="data.link" name="link" #link="ngModel" required url>
-        </mat-form-field>
+          <mat-form-field class="inp">
+            <mat-label *ngIf="link.errors?.url">не верный формат ссылки</mat-label>
+            <input type="text" matInput [(ngModel)]="data.link" name="link" #link="ngModel" required url>
+          </mat-form-field>
+        <div class="inp-wrap">
+          <input class="margin-input" type="file" (change)="handleUpload($event)">
+        </div>
       </div>
       <div mat-dialog-actions class="act">
         <button mat-button (click)="onNoClick()">Отмена</button>
-        <button mat-button [mat-dialog-close]="data.link" [disabled]="!link.control.value || link.errors?.url">Создать</button>
+        <button mat-button [mat-dialog-close]="data" [disabled]="!link.control.value || link.errors?.url">Создать</button>
       </div>
     </div>
   `,
@@ -27,13 +30,20 @@ import {Link} from '../prof.component';
       flex-direction: column;
       align-content: center;
     }
+
     .inp {
       display: flex;
       justify-content: center;
     }
+
     .act {
       display: flex;
       justify-content: space-between;
+    }
+    .inp-wrap {
+      padding: 2px;
+      border: 1px solid #3365ea;
+      border-radius: 5px;
     }
   `]
 })
@@ -47,4 +57,12 @@ export class NewLinkComponent {
     this.dialogRef.close();
   }
 
+  handleUpload(event: any): void {
+    const file = event?.target?.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.data.background = reader.result;
+    };
+  }
 }

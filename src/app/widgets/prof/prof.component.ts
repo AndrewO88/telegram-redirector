@@ -3,12 +3,14 @@ import {FireService} from '../../srv/fire.service';
 import {Observable, Subscription} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {NewLinkComponent} from './new-link/new-link.component';
+import {tap} from 'rxjs/operators';
 
 
 export interface Link {
   id: string;
   count: number;
   link: string;
+  background: any;
 }
 
 
@@ -40,11 +42,14 @@ export class ProfComponent implements OnDestroy {
     });
 
     this.subscriptions.push(
-      dialogRef.afterClosed().subscribe((link) => {
+      dialogRef.afterClosed().pipe(
+        tap((res) => console.log('111', res))
+      ).subscribe((link) => {
         if (link) {
           const newLink: Partial<Link> = {
-            link,
-            count: 0
+            count: 0,
+            background: link.background,
+            link: link.link
           };
 
           this.pService.createPerson(newLink, this.userId).then(undefined);
