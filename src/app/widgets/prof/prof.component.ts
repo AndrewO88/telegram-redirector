@@ -20,6 +20,7 @@ export interface Link {
 })
 export class ProfComponent implements OnDestroy {
   @Input() userId = 'dvach';
+  @Input() personName = 'Юнный грешник';
   links$: Observable<Link[]>;
   displayedColumns: string[] = ['link', 'count', 'actions'];
 
