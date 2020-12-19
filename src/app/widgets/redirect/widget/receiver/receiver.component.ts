@@ -34,7 +34,7 @@ export class ReceiverComponent {
     new Promise<string>((resolve, reject) => {
       let url = this.inputUrl;
 
-      console.log('handleUrl', url);
+      // console.log('handleUrl', url);
 
       if (!url) {
         reject('Error');

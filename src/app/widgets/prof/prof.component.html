@@ -1,7 +1,7 @@
 <div class="links">
   <div class="w">
 
-    <ng-container *ngIf="person$ | async as person">
+    <ng-container *ngIf="person">
       <div class="actions">
         <div class="info">
           <h1>{{person.name}}</h1>
@@ -13,7 +13,7 @@
       </div>
 
       <table mat-table [dataSource]="person.links" class="links-table  mat-elevation-z1">
-        <ng-container matColumnDef="link">
+        <ng-container matColumnDef="url">
           <th mat-header-cell *matHeaderCellDef> Link</th>
           <td mat-cell *matCellDef="let element"> {{element.link}} </td>
         </ng-container>
@@ -23,21 +23,23 @@
           <td mat-cell *matCellDef="let element"> {{element.count}} </td>
         </ng-container>
 
-      <ng-container matColumnDef="metrics">
-        <th mat-header-cell *matHeaderCellDef> Metrics</th>
-        <td mat-cell *matCellDef="let element"> <button mat-raised-button disabled >Скоро</button> </td>
-      </ng-container>
+        <ng-container matColumnDef="metrics">
+          <th mat-header-cell *matHeaderCellDef> Metrics</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-raised-button disabled>Скоро</button>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions</th>
-        <td mat-cell *matCellDef="let element">
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions</th>
+          <td mat-cell *matCellDef="let element">
 
-          <button mat-button [matMenuTriggerFor]="menu">Action Menu</button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="delete(element.id, userId)">Удалить</button>
-            <button mat-menu-item disabled>Изменить</button>
-          </mat-menu>
-        </td>
+            <button mat-button [matMenuTriggerFor]="menu">Action Menu</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="delete(element.id, person.id)">Удалить</button>
+              <button mat-menu-item disabled>Изменить</button>
+            </mat-menu>
+          </td>
 
         </ng-container>
 

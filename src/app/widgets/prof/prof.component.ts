@@ -1,9 +1,8 @@
-import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {FireService} from '../../srv/fire.service';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {NewLinkComponent} from './new-link/new-link.component';
-import {map} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 import {IPerson} from '../../model/person';
 import {ILink, Link, TableColumns} from '../../model/link';
@@ -17,20 +16,29 @@ import {ILink, Link, TableColumns} from '../../model/link';
 })
 export class ProfComponent implements OnInit, OnDestroy {
 
-  person$: Observable<IPerson> | undefined;
-  displayedColumns: TableColumns<Link> = ['id', 'url', 'count', 'actions'];
+  person: IPerson | undefined;
+  displayedColumns: TableColumns<Link> = ['url', 'count', 'metrics', 'actions'];
 
   private subscriptions: Subscription[] = [];
 
   constructor(
     private pService: FireService,
     private dialog: MatDialog,
-    private routes: ActivatedRoute
+    private routes: ActivatedRoute,
+    private crd: ChangeDetectorRef
   ) {
   }
 
   ngOnInit(): void {
-    this.person$ = this.routes.data.pipe(map((response) => response.persone));
+    const personId = Object.keys(this.routes.snapshot.queryParams)[0];
+
+    if (personId) {
+      this.pService.getPersonById(personId).subscribe((person) => {
+        this.person = person;
+        this.crd.detectChanges();
+      });
+    }
+
   }
 
   create(personId: string): void {
@@ -42,7 +50,7 @@ export class ProfComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed().subscribe((response: Partial<ILink>) => {
         if (response) {
           const link = new Link('', response.url || '', 0, response.img || '');
-          this.pService.createPerson(link, personId).then(undefined);
+          this.pService.createLink(link, personId).then(undefined);
         }
       })
     );
@@ -53,7 +61,7 @@ export class ProfComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.pService.deletePerson(linkId, personId).then(undefined);
+    this.pService.deleteLink(linkId, personId).then(undefined);
   }
 
   ngOnDestroy(): void {

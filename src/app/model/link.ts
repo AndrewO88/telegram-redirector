@@ -5,7 +5,7 @@ export interface ILink {
   img: string | null;
 }
 
-export type TableColumns<M> = (keyof M | 'actions')[];
+export type TableColumns<M> = (keyof M | 'metrics' | 'actions')[];
 
 export class Link implements ILink {
   id: string;
