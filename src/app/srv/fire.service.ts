@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {Link} from '../widgets/prof/prof.component';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {DocumentReference} from '@angular/fire/firestore/interfaces';
+import {ILink} from '../model/link';
 
 
 @Injectable({
@@ -14,16 +14,16 @@ export class FireService {
   constructor(private firestore: AngularFirestore) {
   }
 
-  getPersonLinks(personId: string): Observable<Link[]> {
+  getPersonLinks(personId: string): Observable<ILink[]> {
     return this.firestore.collection(`persons/${personId}/links`).snapshotChanges().pipe(
-      map<any, Link[]>((data) => data.map((link: any) => ({
+      map<any, ILink[]>((data) => data.map((link: any) => ({
         ...link.payload.doc.data() as object,
         id: link.payload.doc.id,
       })))
     );
   }
 
-  createPerson(link: Partial<Link>, personId: string): Promise<DocumentReference<any>> {
+  createPerson(link: Partial<ILink>, personId: string): Promise<DocumentReference<any>> {
     return this.firestore.collection(`persons/${personId}/links`).add(link);
   }
 

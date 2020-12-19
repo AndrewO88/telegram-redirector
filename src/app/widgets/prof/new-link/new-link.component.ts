@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Link} from '../prof.component';
+import {ILink} from '../../../model/link';
 
 @Component({
   selector: 'app-link-dialog-component',
@@ -8,10 +8,10 @@ import {Link} from '../prof.component';
     <div class="wrap">
       <h1 mat-dialog-title>Введите название ссылки</h1>
       <div mat-dialog-content>
-          <mat-form-field class="inp">
-            <mat-label *ngIf="link.errors?.url">не верный формат ссылки</mat-label>
-            <input type="text" matInput [(ngModel)]="data.link" name="link" #link="ngModel" required url>
-          </mat-form-field>
+        <mat-form-field class="inp">
+          <mat-label *ngIf="link.errors?.url">не верный формат ссылки</mat-label>
+          <input type="text" matInput [(ngModel)]="data.url" name="link" #link="ngModel" required url>
+        </mat-form-field>
         <div class="inp-wrap">
           <input class="margin-input" type="file" (change)="handleUpload($event)">
         </div>
@@ -40,6 +40,7 @@ import {Link} from '../prof.component';
       display: flex;
       justify-content: space-between;
     }
+
     .inp-wrap {
       padding: 2px;
       border: 1px solid #3365ea;
@@ -50,7 +51,7 @@ import {Link} from '../prof.component';
 export class NewLinkComponent {
   constructor(
     public dialogRef: MatDialogRef<NewLinkComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Link) {
+    @Inject(MAT_DIALOG_DATA) public data: ILink) {
   }
 
   onNoClick(): void {
@@ -62,7 +63,7 @@ export class NewLinkComponent {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      this.data.background = reader.result;
+      this.data.img = reader.result as string;
     };
   }
 }

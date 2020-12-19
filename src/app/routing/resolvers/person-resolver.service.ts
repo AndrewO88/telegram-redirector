@@ -1,27 +1,17 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {Link} from '../../widgets/prof/prof.component';
 import {Observable, of} from 'rxjs';
-
-interface Person {
-  id: string;
-  name: string;
-  links: Link[];
-}
+import {IPerson, Person} from '../../model/person';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PersonResolverService implements Resolve<Person> {
+export class PersonResolverService implements Resolve<IPerson> {
 
   constructor() {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Person> | Promise<Person> | Person {
-    return of({
-      id: 'dvach',
-      name: 'DVACH',
-      links: []
-    });
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IPerson> {
+    return of(new Person('dvach', 'DVACH NAME', []));
   }
 }

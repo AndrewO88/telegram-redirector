@@ -1,17 +1,12 @@
-import {ChangeDetectionStrategy, Component, Input, OnDestroy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {FireService} from '../../srv/fire.service';
 import {Observable, Subscription} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {NewLinkComponent} from './new-link/new-link.component';
-import {tap} from 'rxjs/operators';
-
-
-export interface Link {
-  id: string;
-  count: number;
-  link: string;
-  background: any;
-}
+import {map} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
+import {IPerson} from '../../model/person';
+import {ILink, Link, TableColumns} from '../../model/link';
 
 
 @Component({
@@ -20,46 +15,38 @@ export interface Link {
   styleUrls: ['./prof.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfComponent implements OnDestroy {
-  @Input() userId = 'dvach';
-  @Input() personName = 'Юнный грешник';
-  links$: Observable<Link[]>;
-  displayedColumns: string[] = ['link', 'count', 'actions'];
+export class ProfComponent implements OnInit, OnDestroy {
+
+  person$: Observable<IPerson> | undefined;
+  displayedColumns: TableColumns<Link> = ['id', 'url', 'count', 'actions'];
 
   private subscriptions: Subscription[] = [];
 
   constructor(
     private pService: FireService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private routes: ActivatedRoute
   ) {
-    this.links$ = this.pService.getPersonLinks(this.userId);
   }
 
+  ngOnInit(): void {
+    this.person$ = this.routes.data.pipe(map((response) => response.persone));
+  }
 
-  create(): void {
+  create(personId: string): void {
     const dialogRef = this.dialog.open(NewLinkComponent, {
       data: {}
     });
 
     this.subscriptions.push(
-      dialogRef.afterClosed().pipe(
-        tap((res) => console.log('111', res))
-      ).subscribe((link) => {
-        if (link) {
-          const newLink: Partial<Link> = {
-            count: 0,
-            background: link.background,
-            link: link.link
-          };
-
-          this.pService.createPerson(newLink, this.userId).then(undefined);
+      dialogRef.afterClosed().subscribe((response: Partial<ILink>) => {
+        if (response) {
+          const link = new Link('', response.url || '', 0, response.img || '');
+          this.pService.createPerson(link, personId).then(undefined);
         }
       })
     );
-
-
   }
-
 
   delete(linkId: string, personId: string): void {
     if (!linkId || !personId) {
