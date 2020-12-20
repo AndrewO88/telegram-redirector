@@ -4,8 +4,13 @@
   justify-content: center;
   //align-items: center;
   margin-top: 20px;
+
+  .mat-column-actions {
+    max-width: 25px!important;
+  }
 }
 
+//::ng-deep
 
 
 .links .w {
@@ -47,22 +52,33 @@
     width: 95%;
   }
 }
+
 .actions {
   width: 90%;
   display: flex;
   justify-content: space-between;
 }
+
 .info {
   h1 {
     margin: 0;
+
+    small {
+      color: #999;
+    }
   }
-  h2 {
-    margin: 0;
+
+  .info-description {
+    margin-bottom: 20px;
+    color: #999;
   }
+
   .btn {
   }
 }
+
 .wrap-link {
   max-width: 90px;
   overflow: hidden;
 }
+

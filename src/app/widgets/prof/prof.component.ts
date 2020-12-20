@@ -56,7 +56,10 @@ export class ProfComponent implements OnInit, OnDestroy {
     );
   }
 
-  delete(linkId: string, personId: string): void {
+  delete($event: MouseEvent, linkId: string, personId: string): void {
+    $event.stopPropagation();
+    $event.preventDefault();
+
     if (!linkId || !personId) {
       return;
     }
