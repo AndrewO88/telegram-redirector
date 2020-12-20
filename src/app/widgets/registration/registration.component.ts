@@ -8,9 +8,16 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  onClick($event: MouseEvent): void {
+    $event.stopPropagation();
+    $event.preventDefault();
+
+    window.location.replace('tg://resolve?domain=AccountRegistrator_bot');
+  }
 }
