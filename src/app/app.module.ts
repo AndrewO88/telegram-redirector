@@ -33,7 +33,6 @@ import {NewLinkComponent} from './widgets/prof/new-link/new-link.component';
 import {RegistrationComponent} from './widgets/registration/registration.component';
 import {CustomFormsModule} from 'ng2-validation';
 import {MatMenuModule} from '@angular/material/menu';
-import {MainPageOutletComponent} from './widgets/_main-page/main-page/main-page-outlet.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import {MainPageOutletComponent} from './widgets/_main-page/main-page/main-page-
     FooterComponent,
     MenuComponent,
     TrustComponent,
-    MainPageOutletComponent,
     MainPageComponent,
     ProfComponent,
     NewLinkComponent,

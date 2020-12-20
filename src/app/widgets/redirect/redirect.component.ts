@@ -1,12 +1,13 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
-import {buildLink} from './helpers';
+import {DomSanitizer} from '@angular/platform-browser';
+import {ActivatedRoute} from '@angular/router';
+import {ILink, Link} from '../../model/link';
 
 interface ViewModel {
   isReceive: boolean;
   rootPathname: string;
   currentPathname: string;
-  redirectLink: SafeUrl;
+  link: ILink;
 }
 
 @Component({
@@ -57,7 +58,7 @@ interface ViewModel {
           </ng-container>
 
           <ng-template #forward>
-            <app-redirector [redirectLink]="view.redirectLink"></app-redirector>
+            <app-redirector [link]="view.link"></app-redirector>
           </ng-template>
 
         </ng-container>
@@ -72,7 +73,8 @@ export class RedirectComponent implements OnInit {
   viewModel: ViewModel | undefined;
 
   constructor(
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute
   ) {
   }
 
@@ -83,14 +85,21 @@ export class RedirectComponent implements OnInit {
   private _initModel(): void {
     const currentPathname = location.pathname;
     const info = currentPathname.split('/');
+    const links: ILink[] = this.route.snapshot.data.links.map((link: ILink) => ({
+      id: link.id,
+      count: link.count,
+      url: link.url,
+      img: link.img,
+      personId: link.personId
+    }));
 
     this.viewModel = {
-      // isReceive: true,
       isReceive: !info.filter(part => !!part).length,
       currentPathname: location.pathname,
       rootPathname: '/',
-      redirectLink: this.sanitizer.bypassSecurityTrustUrl(buildLink(info))
+      link: Link.INIT(info[1], links)
     };
 
   }
+
 }
