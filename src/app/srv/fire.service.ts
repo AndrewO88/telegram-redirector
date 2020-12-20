@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {from, Observable, of} from 'rxjs';
+import {from, Observable} from 'rxjs';
 import {filter, map, mergeMap, switchMap, take, tap, toArray} from 'rxjs/operators';
 import {DocumentReference} from '@angular/fire/firestore/interfaces';
 import {ILink} from '../model/link';
-import {IPerson, Person} from '../model/person';
+import {IPerson} from '../model/person';
 
 
 @Injectable({
