@@ -14,7 +14,7 @@
 
       <table mat-table [dataSource]="person.links" class="links-table  mat-elevation-z1">
         <ng-container matColumnDef="url">
-          <th mat-header-cell *matHeaderCellDef> URL</th>
+          <th mat-header-cell *matHeaderCellDef> @username</th>
           <td mat-cell *matCellDef="let element"> {{element.url}} </td>
         </ng-container>
 
