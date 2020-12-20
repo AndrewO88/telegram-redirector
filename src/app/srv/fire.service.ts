@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {from, Observable} from 'rxjs';
-import {filter, map, mergeMap, switchMap, take, tap, toArray} from 'rxjs/operators';
+import {filter, map, mergeMap, switchMap, take, toArray} from 'rxjs/operators';
 import {DocumentReference} from '@angular/fire/firestore/interfaces';
 import {ILink} from '../model/link';
 import {IPerson} from '../model/person';
@@ -48,23 +48,20 @@ export class FireService {
       switchMap((persons) => from(persons).pipe(
         mergeMap((person) => this.getPersonLinks(person.id).pipe(take(1))),
         toArray(),
-        mergeMap(x => x)
+        map((res: any[]) => res.flat())
       )),
-      // tap((data) => console.log('3.', data)),
     );
   }
 
   getPersonById(personId: string): Observable<IPerson> {
     return this.firestore.collection(`persons`).doc(personId).valueChanges().pipe(
-      // tap((data) => console.log('1.', data)),
       filter<any>((person) => !!person),
       switchMap<Partial<IPerson>, Observable<IPerson>>((person) => this.getPersonLinks(person.id).pipe(
         map((links) => ({
           ...person,
           links
         } as IPerson))
-      )),
-      // tap((data) => console.log('4.', data)),
+      ))
     );
   }
 
