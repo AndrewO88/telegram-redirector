@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {Observable, of} from 'rxjs';
-import {filter, map, switchMap, tap} from 'rxjs/operators';
+import {from, Observable, of} from 'rxjs';
+import {filter, map, mergeMap, switchMap, take, tap, toArray} from 'rxjs/operators';
 import {DocumentReference} from '@angular/fire/firestore/interfaces';
 import {ILink} from '../model/link';
 import {IPerson, Person} from '../model/person';
@@ -17,14 +17,40 @@ export class FireService {
 
   getPersonLinks(personId: string | undefined): Observable<ILink[]> {
     return this.firestore.collection(`persons/${personId}/links`).snapshotChanges().pipe(
-      // tap((data) => console.log('2.', data)),
-
       map<any, ILink[]>((data) => data.map((link: any) => ({
         ...link.payload.doc.data() as object,
         id: link.payload.doc.id,
+        personId
       }))),
+    );
+  }
 
-      // tap((data) => console.log('3.', data)),
+  incrementCount(personId: string, linkId: string): Promise<void> {
+    return this.firestore.collection('persons').doc(personId).collection('links').doc(linkId).get().toPromise().then((doc) => {
+      const count = doc.data()?.count + 1;
+      const linkRef = this.firestore.collection('persons').doc(personId).collection('links').doc(linkId);
+
+      return linkRef.update({
+        count
+      });
+    });
+  }
+
+  getAllPersons(): Observable<IPerson[]> {
+    return this.firestore.collection<IPerson>(`persons`).valueChanges().pipe(
+      take(1)
+    );
+  }
+
+  allLinks(): Observable<ILink[]> {
+    return this.getAllPersons().pipe(
+      filter(x => !!x),
+      switchMap((persons) => from(persons).pipe(
+        mergeMap((person) => this.getPersonLinks(person.id).pipe(take(1))),
+        toArray(),
+        mergeMap(x => x)
+      )),
+      tap((data) => console.log('3.', data)),
     );
   }
 
