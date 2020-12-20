@@ -31,7 +31,6 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {NewLinkComponent} from './widgets/prof/new-link/new-link.component';
 import {RegistrationComponent} from './widgets/registration/registration.component';
-import {CustomFormsModule} from 'ng2-validation';
 import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
@@ -69,7 +68,6 @@ import {MatMenuModule} from '@angular/material/menu';
     FormsModule,
     MatCardModule,
     MatTableModule,
-    CustomFormsModule,
     MatMenuModule
   ],
   providers: [],

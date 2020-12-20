@@ -50,7 +50,7 @@ export class FireService {
         toArray(),
         mergeMap(x => x)
       )),
-      tap((data) => console.log('3.', data)),
+      // tap((data) => console.log('3.', data)),
     );
   }
 

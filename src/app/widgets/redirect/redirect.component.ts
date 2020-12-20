@@ -85,7 +85,8 @@ export class RedirectComponent implements OnInit {
   private _initModel(): void {
     const currentPathname = location.pathname;
     const info = currentPathname.split('/');
-    const links: ILink[] = this.route.snapshot.data.links.map((link: ILink) => ({
+
+    const links: ILink[] = this.route.snapshot.data.links && this.route.snapshot.data.links.map((link: ILink) => ({
       id: link.id,
       count: link.count,
       url: link.url,
