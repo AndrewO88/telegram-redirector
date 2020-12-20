@@ -6,11 +6,11 @@ import {ILink} from '../../../model/link';
   selector: 'app-link-dialog-component',
   template: `
     <div class="wrap">
-      <h1 mat-dialog-title>Введите название ссылки</h1>
+      <h1  class="h1-style" mat-dialog-title>Введите имя пользователя</h1>
       <div mat-dialog-content>
         <mat-form-field class="inp">
-          <mat-label *ngIf="link.errors?.url">не верный формат ссылки</mat-label>
-          <input type="text" matInput [(ngModel)]="data.url" name="link" #link="ngModel" required url>
+          <mat-placeholder>@username</mat-placeholder>
+          <input type="text" matInput [(ngModel)]="data.url" name="link" #link="ngModel" required>
         </mat-form-field>
         <div class="inp-wrap">
           <input class="margin-input" type="file" (change)="backgroundUpload($event)">
@@ -18,7 +18,7 @@ import {ILink} from '../../../model/link';
       </div>
       <div mat-dialog-actions class="act">
         <button mat-button (click)="onNoClick()">Отмена</button>
-        <button mat-button [mat-dialog-close]="data" [disabled]="!link.control.value || link.errors?.url">Создать</button>
+        <button mat-button [mat-dialog-close]="data" [disabled]="!link.control.value">Создать</button>
       </div>
     </div>
   `,
@@ -30,10 +30,15 @@ import {ILink} from '../../../model/link';
       flex-direction: column;
       align-content: center;
     }
+    .h1-style {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
 
     .inp {
       display: flex;
       justify-content: center;
+      width: 100%;
     }
 
     .act {
