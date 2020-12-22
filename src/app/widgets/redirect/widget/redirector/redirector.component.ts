@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {interval, Observable} from 'rxjs';
 import {finalize, map, startWith, take} from 'rxjs/operators';
@@ -8,7 +8,7 @@ import {FireService} from '../../../../srv/fire.service';
 @Component({
   selector: 'app-redirector',
   template: `
-    <div *ngIf="link as model" class="redirector">
+    <div *ngIf="link as model" class="redirector" [style.background-image]="'url('+model?.img+')'">
 
       <div class="link">
         <div>
@@ -19,7 +19,7 @@ import {FireService} from '../../../../srv/fire.service';
         <span *ngIf="timer$ | async as timer">переадресация через ({{timer}})</span>
       </div>
 
-      <mat-card class="info">
+      <mat-card *ngIf="!model?.img" class="info">
         <p><span class="text-color1">Что сейчас должно произойти?</span></p>
         <p>открыта ссылка на канал в приложении <strong><a href="https://tlgrm.ru"
                                                            target="_blank"><span class="text-color1">Telegram</span></a></strong>
@@ -35,7 +35,7 @@ import {FireService} from '../../../../srv/fire.service';
   styleUrls: ['./redirector.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RedirectorComponent {
+export class RedirectorComponent implements OnInit {
 
   @Input() link: ILink | undefined;
 
@@ -54,6 +54,11 @@ export class RedirectorComponent {
     private sanitizer: DomSanitizer,
     private fire: FireService
   ) {
+  }
+
+  ngOnInit() {
+    console.log(this.link);
+
   }
 
   redirect(): void {
