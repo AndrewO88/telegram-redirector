@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {interval, Observable} from 'rxjs';
 import {finalize, map, startWith, take} from 'rxjs/operators';
@@ -35,7 +35,7 @@ import {FireService} from '../../../../srv/fire.service';
   styleUrls: ['./redirector.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RedirectorComponent implements OnInit {
+export class RedirectorComponent {
 
   @Input() link: ILink | undefined;
 
@@ -54,11 +54,6 @@ export class RedirectorComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private fire: FireService
   ) {
-  }
-
-  ngOnInit() {
-    console.log(this.link);
-
   }
 
   redirect(): void {
