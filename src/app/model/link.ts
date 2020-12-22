@@ -1,8 +1,9 @@
 export interface ILink {
   id: string;
   count: number;
+  title: string;
   url: string;
-  img: string | null;
+  img?: string;
   personId?: string;
 }
 
@@ -11,7 +12,8 @@ export type TableColumns<M> = (keyof M | 'metrics' | 'actions')[];
 export class Link implements ILink {
   id: string;
   url: string;
-  img: string | null;
+  title: string;
+  img?: string;
   count: number;
 
   static buildLink = (info: string[]): string => {
@@ -45,16 +47,17 @@ export class Link implements ILink {
       [key: string]: Link
     } = collection.reduce((acc, cur) => ({
       ...acc,
-      [cur.url]: cur
+      [cur.title]: cur
     }), {});
 
-    return result[link] ?? new Link('', link, 0, '');
+    return result[link] ?? new Link('', '', link, 0, '');
 
   }
 
-  constructor(id: string, url: string, count: number, img: string | null) {
+  constructor(id: string, title: string, url: string, count: number, img?: string) {
     this.id = id;
     this.url = url;
+    this.title = title;
     this.count = count;
     this.img = img;
   }

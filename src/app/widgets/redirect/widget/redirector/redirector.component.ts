@@ -1,9 +1,10 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {interval, Observable} from 'rxjs';
 import {finalize, map, startWith, take} from 'rxjs/operators';
 import {ILink, Link} from '../../../../model/link';
 import {FireService} from '../../../../srv/fire.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-redirector',
@@ -35,9 +36,10 @@ import {FireService} from '../../../../srv/fire.service';
   styleUrls: ['./redirector.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RedirectorComponent {
+export class RedirectorComponent implements OnInit {
 
   @Input() link: ILink | undefined;
+  urlPath = '';
 
   get safeLink(): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(Link.buildLink(['', this.link?.url || '']));
@@ -52,8 +54,13 @@ export class RedirectorComponent {
 
   constructor(
     private sanitizer: DomSanitizer,
-    private fire: FireService
+    private fire: FireService,
+    private route: ActivatedRoute
   ) {
+  }
+
+  ngOnInit(): void {
+    this.urlPath = this.route.snapshot.url[0].path;
   }
 
   redirect(): void {
@@ -65,12 +72,15 @@ export class RedirectorComponent {
     }
 
     this.fire.incrementCount(this.link?.personId || '', this.link?.id || '').then(() => {
-      if ((this.link?.count || 0) % 5 === 0) {
+      if ((this.link?.count || 0) + 1 % 5 === 0) {
         window.location.replace('https://yandex.ru');
         return;
       }
 
-      window.location.replace(Link.buildLink(['', this.link?.url || '']));
+      if (this.link?.url) {
+        window.location.replace(this.link?.url);
+      }
+
       return;
     });
 

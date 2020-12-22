@@ -6,10 +6,14 @@ import {ILink} from '../../../model/link';
   selector: 'app-link-dialog-component',
   template: `
     <div class="wrap">
-      <h1  class="h1-style" mat-dialog-title>Введите имя пользователя</h1>
+      <h1 class="h1-style" mat-dialog-title>Введите имя пользователя</h1>
       <div mat-dialog-content>
         <mat-form-field class="inp">
-          <mat-placeholder>@username</mat-placeholder>
+          <mat-placeholder>alias</mat-placeholder>
+          <input type="text" matInput [(ngModel)]="data.title" name="title" #link="ngModel" required>
+        </mat-form-field>
+        <mat-form-field class="inp">
+          <mat-placeholder>URL</mat-placeholder>
           <input type="text" matInput [(ngModel)]="data.url" name="link" #link="ngModel" required>
         </mat-form-field>
         <div class="inp-wrap">
@@ -33,6 +37,7 @@ import {ILink} from '../../../model/link';
       align-content: center;
       text-align: center;
     }
+
     .h1-style {
       font-size: 16px;
       margin-bottom: 0;

@@ -17,7 +17,7 @@ import {ILink, Link, TableColumns} from '../../model/link';
 export class ProfComponent implements OnInit, OnDestroy {
 
   person: IPerson | undefined;
-  displayedColumns: TableColumns<Link> = ['url', 'count', 'metrics', 'actions'];
+  displayedColumns: TableColumns<Link> = ['title', 'url', 'count', 'metrics', 'actions'];
 
   private subscriptions: Subscription[] = [];
 
@@ -47,9 +47,9 @@ export class ProfComponent implements OnInit, OnDestroy {
     });
 
     this.subscriptions.push(
-      dialogRef.afterClosed().subscribe((response: Partial<ILink>) => {
+      dialogRef.afterClosed().subscribe((response: ILink) => {
         if (response) {
-          const link = new Link('', response.url || '', 0, response.img || '');
+          const link = new Link('', response.title, response.url, 0, response?.img);
           this.pService.createLink(link, personId).then(undefined);
         }
       })
