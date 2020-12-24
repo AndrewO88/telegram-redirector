@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import {DomSanitizer, SafeUrl, Title} from '@angular/platform-browser';
 import {interval, Observable} from 'rxjs';
 import {finalize, map, startWith, take} from 'rxjs/operators';
 import {ILink, Link} from '../../../../model/link';
@@ -55,12 +55,18 @@ export class RedirectorComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private fire: FireService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private titleService: Title
   ) {
   }
 
   ngOnInit(): void {
     this.urlPath = this.route.snapshot.url[0].path;
+    const pageTitle = this.link?.title + '' || this.urlPath;
+    const ym = (window as any).ym;
+
+    this.titleService.setTitle(pageTitle);
+    ym(70790716, 'hit', this.urlPath, {title: pageTitle});
   }
 
   redirect(): void {
