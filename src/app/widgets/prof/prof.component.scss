@@ -8,6 +8,21 @@
   .mat-column-actions {
     max-width: 25px!important;
   }
+  .mat-column-url {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 28% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
 }
 
 //::ng-deep
@@ -80,8 +95,11 @@
   }
 }
 
-.wrap-link {
-  max-width: 90px;
-  overflow: hidden;
+.wrap {
+  white-space: pre-wrap;
+}
+.hover-title:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 

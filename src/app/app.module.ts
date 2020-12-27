@@ -32,6 +32,7 @@ import {MatTableModule} from '@angular/material/table';
 import {NewLinkComponent} from './widgets/prof/new-link/new-link.component';
 import {RegistrationComponent} from './widgets/registration/registration.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -48,28 +49,29 @@ import {MatMenuModule} from '@angular/material/menu';
     NewLinkComponent,
     RegistrationComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    MatButtonModule,
-    MatBadgeModule,
-    MatToolbarModule,
-    RedirectModule,
-    RoutingModule,
-    HttpClientModule,
-    AngularFireModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule,
-    MatTabsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatCardModule,
-    MatTableModule,
-    MatMenuModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatButtonModule,
+        MatBadgeModule,
+        MatToolbarModule,
+        RedirectModule,
+        RoutingModule,
+        HttpClientModule,
+        AngularFireModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireDatabaseModule,
+        MatTabsModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatCardModule,
+        MatTableModule,
+        MatMenuModule,
+        ClipboardModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

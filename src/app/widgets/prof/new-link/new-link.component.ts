@@ -6,25 +6,36 @@ import {ILink} from '../../../model/link';
   selector: 'app-link-dialog-component',
   template: `
     <div class="wrap">
-      <h1 class="h1-style" mat-dialog-title>Введите имя пользователя</h1>
+      <h1 class="h1-style" mat-dialog-title>Заполните форму</h1>
       <div mat-dialog-content>
         <mat-form-field class="inp">
-          <mat-placeholder>alias</mat-placeholder>
-          <input type="text" matInput [(ngModel)]="data.title" name="title" #link="ngModel" required>
+          <input type="text" matInput [(ngModel)]="data.title" name="title" #title="ngModel" required>
+          <mat-hint>Это будет короткой ссылкой на Ваш канал</mat-hint>
         </mat-form-field>
+        <br>
         <mat-form-field class="inp">
           <mat-placeholder>URL</mat-placeholder>
+          <mat-hint>Введите адрес Telegram канала</mat-hint>
           <input type="text" matInput [(ngModel)]="data.url" name="link" #link="ngModel" required>
         </mat-form-field>
         <div class="inp-wrap">
-          <input class="margin-input" type="file" (change)="backgroundUpload($event)">
+          <label class="btn btn-primary">
+            <i class="fa fa-image"></i>Загрузите фоновое изображение<input required type="file" class="margin-input" style="display: none;"
+                                                                   (change)="backgroundUpload($event)">
+          </label>
+        </div>
+        <div class="preview">
+          <br>
+          <br>
+          <mat-hint>Это будет короткой ссылкой на Ваш канал</mat-hint>
+          <h2>teleg-on.online/{{data.title}}</h2> <img [src]=data.img>
+        </div>
+        <div mat-dialog-actions class="act">
+          <button mat-button (click)="onNoClick()">Отмена</button>
+          <button mat-button [mat-dialog-close]="data" [disabled]="!link.control.value || !title.control.value || !data.img">Создать
+          </button>
         </div>
       </div>
-      <div mat-dialog-actions class="act">
-        <button mat-button (click)="onNoClick()">Отмена</button>
-        <button mat-button [mat-dialog-close]="data" [disabled]="!link.control.value">Создать</button>
-      </div>
-    </div>
   `,
   styles: [`
     .inp {
@@ -49,6 +60,7 @@ import {ILink} from '../../../model/link';
     }
 
     .inp-wrap {
+      margin-top: 30px;
       padding: 2px;
       border: 1px solid #3365ea;
       border-radius: 5px;

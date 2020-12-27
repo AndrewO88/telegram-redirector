@@ -17,7 +17,7 @@ import {ILink, Link, TableColumns} from '../../model/link';
 export class ProfComponent implements OnInit, OnDestroy {
 
   person: IPerson | undefined;
-  displayedColumns: TableColumns<Link> = ['title', 'url', 'count', 'metrics', 'actions'];
+  displayedColumns: TableColumns<Link> = ['title', 'count', 'metrics', 'actions'];
 
   private subscriptions: Subscription[] = [];
 
