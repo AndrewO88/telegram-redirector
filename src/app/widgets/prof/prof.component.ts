@@ -47,7 +47,8 @@ export class ProfComponent implements OnInit, OnDestroy {
 
   create(personId: string): void {
     const dialogRef = this.dialog.open(NewLinkComponent, {
-      data: {}
+      data: {},
+      height: '500px',
     });
 
     this.subscriptions.push(

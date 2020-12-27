@@ -1,6 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ILink} from '../../../model/link';
+import {Clipboard} from '@angular/cdk/clipboard';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-link-dialog-component',
@@ -21,14 +23,15 @@ import {ILink} from '../../../model/link';
         <div class="inp-wrap">
           <label class="btn btn-primary">
             <i class="fa fa-image"></i>Загрузите фоновое изображение<input required type="file" class="margin-input" style="display: none;"
-                                                                   (change)="backgroundUpload($event)">
+                                                                           (change)="backgroundUpload($event)">
           </label>
         </div>
         <div class="preview">
           <br>
-          <br>
           <mat-hint>Это будет короткой ссылкой на Ваш канал</mat-hint>
-          <h2>teleg-on.online/{{data.title}}</h2> <img [src]=data.img>
+          <h2 (click)="copyTo($event, 'https://teleg-on.online/' + data.title)">
+            <mat-icon class="icon">file_copy</mat-icon>teleg-on.online/{{data.title}}</h2>
+          <img [src]=data.img alt="">
         </div>
         <div mat-dialog-actions class="act">
           <button mat-button (click)="onNoClick()">Отмена</button>
@@ -36,6 +39,7 @@ import {ILink} from '../../../model/link';
           </button>
         </div>
       </div>
+    </div>
   `,
   styles: [`
     .inp {
@@ -65,12 +69,18 @@ import {ILink} from '../../../model/link';
       border: 1px solid #3365ea;
       border-radius: 5px;
     }
+
+    .mat-dialog-content {
+    }
   `]
 })
 export class NewLinkComponent {
   constructor(
     public dialogRef: MatDialogRef<NewLinkComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ILink) {
+    @Inject(MAT_DIALOG_DATA) public data: ILink,
+    private clipboard: Clipboard,
+    private snackBar: MatSnackBar
+  ) {
   }
 
   onNoClick(): void {
@@ -84,5 +94,26 @@ export class NewLinkComponent {
     reader.onload = () => {
       this.data.img = reader.result as string;
     };
+  }
+
+  copyTo($event: MouseEvent, value: string): void {
+    $event.stopPropagation();
+    $event.preventDefault();
+
+    const pending = this.clipboard.beginCopy(value);
+
+    let remainingAttempts = 3;
+    const attempt = () => {
+      const result = pending.copy();
+      if (!result && --remainingAttempts) {
+        setTimeout(attempt);
+      } else {
+        this.snackBar.open('Скопировано в буфер обмена!', 'Ok', {
+          duration: 3000,
+        });
+        pending.destroy();
+      }
+    };
+    attempt();
   }
 }
