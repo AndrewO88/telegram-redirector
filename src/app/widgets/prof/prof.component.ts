@@ -6,6 +6,8 @@ import {NewLinkComponent} from './new-link/new-link.component';
 import {ActivatedRoute} from '@angular/router';
 import {IPerson} from '../../model/person';
 import {ILink, Link, TableColumns} from '../../model/link';
+import {Clipboard} from '@angular/cdk/clipboard';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -25,7 +27,9 @@ export class ProfComponent implements OnInit, OnDestroy {
     private pService: FireService,
     private dialog: MatDialog,
     private routes: ActivatedRoute,
-    private crd: ChangeDetectorRef
+    private crd: ChangeDetectorRef,
+    private clipboard: Clipboard,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -71,4 +75,25 @@ export class ProfComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
+
+  copyTo($event: MouseEvent, value: string): void {
+    $event.stopPropagation();
+    $event.preventDefault();
+
+    const pending = this.clipboard.beginCopy(value);
+
+    let remainingAttempts = 3;
+    const attempt = () => {
+      const result = pending.copy();
+      if (!result && --remainingAttempts) {
+        setTimeout(attempt);
+      } else {
+        this.snackBar.open('Скопировано в буфер обмена!', 'Ok', {
+          duration: 3000,
+        });
+        pending.destroy();
+      }
+    };
+    attempt();
+  }
 }

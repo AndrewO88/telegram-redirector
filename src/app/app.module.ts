@@ -33,6 +33,8 @@ import {NewLinkComponent} from './widgets/prof/new-link/new-link.component';
 import {RegistrationComponent} from './widgets/registration/registration.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -49,29 +51,30 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     NewLinkComponent,
     RegistrationComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatIconModule,
-        MatButtonModule,
-        MatBadgeModule,
-        MatToolbarModule,
-        RedirectModule,
-        RoutingModule,
-        HttpClientModule,
-        AngularFireModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireDatabaseModule,
-        MatTabsModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatCardModule,
-        MatTableModule,
-        MatMenuModule,
-        ClipboardModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatBadgeModule,
+    MatToolbarModule,
+    RedirectModule,
+    RoutingModule,
+    HttpClientModule,
+    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatCardModule,
+    MatTableModule,
+    MatMenuModule,
+    ClipboardModule,
+    MatSnackBarModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
