@@ -5,6 +5,7 @@ export interface ILink {
   url: string;
   img?: string;
   personId?: string;
+  logo?: string;
 }
 
 export type TableColumns<M> = (keyof M | 'metrics' | 'actions')[];
@@ -15,6 +16,7 @@ export class Link implements ILink {
   title: string;
   img?: string;
   count: number;
+  logo?: string;
 
   static buildLink = (info: string[]): string => {
     let str: string;
