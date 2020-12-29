@@ -8,6 +8,7 @@ interface ViewModel {
   rootPathname: string;
   currentPathname: string;
   link: ILink;
+  isRegistered: boolean;
 }
 
 @Component({
@@ -86,12 +87,15 @@ export class RedirectComponent implements OnInit {
     const currentPathname = location.pathname;
     const info = currentPathname.split('/');
     const links: ILink[] = this.route.snapshot.data.links ?? [];
+    const link = links.find(l => l.title === info[1]);
+    const isRegistered = !!link;
 
     this.viewModel = {
       isReceive: !info.filter(part => !!part).length,
       currentPathname: location.pathname,
       rootPathname: '/',
-      link: Link.INIT(info[1], links)
+      link: link ?? new Link('', '', Link.buildLink(info), 0, ''),
+      isRegistered
     };
 
   }

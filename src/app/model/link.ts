@@ -35,7 +35,7 @@ export class Link implements ILink {
         break;
       default:
         const domain = info[1];
-        str = 'tg:resolve?domain=' + domain + location.search.replace('?start=', '&start=');
+        str = 'tg://resolve?domain=' + domain + location.search.replace('?start=', '&start=');
         if (info[2]) {
           str += '&post=' + info[2];
         }

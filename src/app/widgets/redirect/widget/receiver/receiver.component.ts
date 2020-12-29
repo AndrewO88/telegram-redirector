@@ -37,7 +37,7 @@ export class ReceiverComponent {
       // console.log('handleUrl', url);
 
       if (!url) {
-        reject('Error');
+        // reject('Error');
       } else {
         if (url?.match(/^[a-zA-Z\?=\d_-]+$/)) {
           return resolve('https://' + window.location.host + '/' + url);

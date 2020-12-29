@@ -55,7 +55,7 @@ export class RedirectorComponent implements OnInit {
   urlPath = '';
 
   get safeLink(): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl(Link.buildLink(['', this.link?.url || '']));
+    return this.sanitizer.bypassSecurityTrustUrl(this.link?.url || '');
   }
 
   timer$: Observable<number> = interval(1000).pipe(
@@ -97,7 +97,8 @@ export class RedirectorComponent implements OnInit {
       }
 
       if (this.link?.url) {
-        window.location.replace(this.link?.url);
+        const link = this.link?.url.slice(12, this.link?.url?.length);
+        window.location.replace(Link.buildLink(link?.split('/')));
       }
 
       return;
