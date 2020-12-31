@@ -17,7 +17,8 @@ import {ActivatedRoute} from '@angular/router';
                                                                           src="{{model.logo}}">
           </div>
           <div class="example-title">{{model?.title}}</div>
-          <div *ngIf="model.count" class="example-info">Более <span>{{model.count}} </span>переходов</div>
+          <!--          <div *ngIf="model.count" class="example-info">Более <span>{{model.count}} </span>переходов</div>-->
+          <div *ngIf="model.count" class="example-info"><br/></div>
           <a class="example-link" (click)="onRedirectClick($event)">Перейти в Telegram</a></div>
       </div>
       <ng-template #nologo>
@@ -91,10 +92,10 @@ export class RedirectorComponent implements OnInit {
     }
 
     this.fire.incrementCount(this.link?.personId || '', this.link?.id || '').then(() => {
-      if ((this.link?.count || 0) + 1 % 5 === 0) {
-        window.location.replace('https://yandex.ru');
-        return;
-      }
+      // if ((this.link?.count || 0) + 1 % 5 === 0) {
+      //   window.location.replace('https://yandex.ru');
+      //   return;
+      // }
 
       if (this.link?.url) {
         const link = this.link?.url.slice(12, this.link?.url?.length);
