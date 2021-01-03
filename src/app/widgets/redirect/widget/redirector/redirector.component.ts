@@ -5,26 +5,36 @@ import {finalize, map, startWith, take} from 'rxjs/operators';
 import {ILink, Link} from '../../../../model/link';
 import {FireService} from '../../../../srv/fire.service';
 import {ActivatedRoute} from '@angular/router';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-redirector',
   template: `
     <div *ngIf="link as model" class="redirector" [style.background-image]="'url('+model?.img+')'">
 
-      <div class="examples-list">
-        <div class="example">
-          <div *ngIf="model.logo; else nologo" class="example-image"><img class="example-image__src"
-                                                                          src="{{model.logo}}">
+      <div class="form form_image">
+        <div class="form-fallback">
+          <a class="form-fallback__image" href="tg://resolve?domain=qwwedwef">
+            <div class="form-fallback__image-src"></div>
+          </a>
+          <h2 class="form-title">Переход в Telegram</h2>
+          <h3 class="form-info">Ссылка откроется внутри приложения</h3>
+        </div>
+        <div class="form-controls">
+          <a class="form-controls__open" href="tg://resolve?domain=qwwedwef">Открыть в Telegram</a>
+        </div>
+        <div class="tg-install">
+          <div class="tg-install__text">У вас еще нет Telegram? Установите сейчас!</div>
+          <div class="tg-install__links">
+            <a class="tg-install__link tg-install__link_android" href="https://play.google.com/store/apps/details?id=org.telegram.messenger"
+               target="_blank"></a>
+            <a class="tg-install__link tg-install__link_apple" href="https://apps.apple.com/app/telegram-messenger/id686449807"
+               target="_blank"></a>
           </div>
-          <div class="example-title">{{model?.title}}</div>
-          <!--          <div *ngIf="model.count" class="example-info">Более <span>{{model.count}} </span>переходов</div>-->
-          <div *ngIf="model.count" class="example-info"><br/></div>
-          <a class="example-link" (click)="onRedirectClick($event)">Перейти в Telegram</a></div>
+        </div>
       </div>
-      <ng-template #nologo>
-        <div class="example-image"><img class="example-image__src"
-                                        src="/assets/images/Telegram_logo.svg"></div>
-      </ng-template>
+
+
       <!--      <div class="link">-->
       <!--        <div>-->
       <!--          <a mat-raised-button (click)="onRedirectClick($event)" class="link-anchor" color="accent" [href]="safeLink">-->
@@ -48,6 +58,34 @@ import {ActivatedRoute} from '@angular/router';
 
   `,
   styleUrls: ['./redirector.component.scss'],
+  animations: [
+    // trigger('FadeIn', [
+    //   state('void', style({
+    //     opacity: 0
+    //   })),
+    //   transition('void <=> *', animate(1000)),
+    // ]),
+    // trigger('EnterLeave', [
+    //   state('flyIn', style({ transform: 'translateX(0)' })),
+    //   transition(':enter', [
+    //     style({ transform: 'translateX(-100%)' }),
+    //     animate('0.5s 300ms ease-in')
+    //   ]),
+    //   transition(':leave', [
+    //     animate('0.3s ease-out', style({ transform: 'translateX(100%)' }))
+    //   ])
+    // ]),
+    // trigger('Pulse', [
+    //   state('Out', style({ transform: 'translateX(0)' })),
+    //   transition(':enter', [
+    //     style({ transform: 'translateX(-100%)' }),
+    //     animate('0.5s 300ms ease-in')
+    //   ]),
+    //   transition(':leave', [
+    //     animate('0.3s ease-out', style({ transform: 'translateX(100%)' }))
+    //   ])
+    // ])
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RedirectorComponent implements OnInit {

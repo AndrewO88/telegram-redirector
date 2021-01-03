@@ -6,6 +6,7 @@ export interface ILink {
   img?: string;
   personId?: string;
   logo?: string;
+  subscribers?: number;
 }
 
 export type TableColumns<M> = (keyof M | 'metrics' | 'actions')[];
@@ -42,7 +43,7 @@ export class Link implements ILink {
     }
 
     return str;
-  }
+  };
 
   static INIT = (link: string, collection: ILink[] = []): ILink => {
     const result: {
@@ -54,7 +55,7 @@ export class Link implements ILink {
 
     return result[link] ?? new Link('', '', link, 0, '');
 
-  }
+  };
 
   constructor(id: string, title: string, url: string, count: number, img?: string) {
     this.id = id;
