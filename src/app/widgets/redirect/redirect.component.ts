@@ -1,7 +1,9 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
 import {ILink, Link} from '../../model/link';
+import {TelegramService} from '../../srv/telegram.service';
+import {take} from 'rxjs/operators';
 
 interface ViewModel {
   isReceive: boolean;
@@ -75,12 +77,15 @@ export class RedirectComponent implements OnInit {
 
   constructor(
     private sanitizer: DomSanitizer,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private tg: TelegramService,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
   ngOnInit(): void {
     this._initModel();
+    this._getDataFromTgPage(this.viewModel?.link?.title || '');
   }
 
   private _initModel(): void {
@@ -98,6 +103,24 @@ export class RedirectComponent implements OnInit {
       isRegistered
     };
 
+  }
+
+  private _getDataFromTgPage(channel: string): void {
+    if (channel) {
+      this.tg.membersCount$(channel).pipe(take(1)).subscribe((info) => {
+        if (this.viewModel?.link) {
+          this.viewModel = {
+            ...this.viewModel,
+            link: {
+              ...this.viewModel.link,
+              subscribers: info?.count || 0,
+              logo: info?.imgSrc || ''
+            }
+          };
+          this.cdr.detectChanges();
+        }
+      });
+    }
   }
 
 }
