@@ -26,7 +26,7 @@ export class TelegramService {
       'Access-Control-Allow-Origin': '*'
     });
 
-    return this.http.get(`http://194.67.92.170:8089/?channel=${channel}`, {
+    return this.http.get(`https://api.teleg-on.online:8200/?channel=${channel}`, {
       headers
     });
   }
