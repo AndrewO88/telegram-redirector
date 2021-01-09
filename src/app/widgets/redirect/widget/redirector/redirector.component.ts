@@ -25,6 +25,7 @@ import {ActivatedRoute} from '@angular/router';
           <h2 class="form-title">{{model?.title || 'Переход в Telegram'}} </h2>
           <h3 *ngIf="model?.subscribers" class="form-info">Более {{model.subscribers}} подписчиков</h3>
         </div>
+
         <div class="form-controls">
           <a
             class="form-controls__open"
@@ -32,6 +33,18 @@ import {ActivatedRoute} from '@angular/router';
             (click)="onRedirectClick($event)"
           >Открыть в Telegram</a>
         </div>
+
+
+        <div class="banner">
+          <a href="http://1link2020.com/1xtop" target="_blank">
+            <video autoplay loop>
+              <source src="/assets/images/1xwinter.mp4" type="video/mp4"/>
+              <!--          <img src="video.gif" width="400" height="300"/>-->
+            </video>
+          </a>
+        </div>
+
+
         <div class="tg-install">
           <div class="tg-install__text">У вас еще нет Telegram? Установите сейчас!</div>
           <div class="tg-install__links">

@@ -240,6 +240,7 @@
   background: url(/assets/images/i-android-697bb077cb0d728544245a9e2c910980af9ff389555b272c49693c7f9fb72560.svg) center no-repeat;
   background-size: 21px 25px;
 }
+
 .tg-install__link {
   width: 42px;
   height: 40px;
@@ -249,4 +250,12 @@
 .tg-install__link_apple {
   background: url(/assets/images/i-apple-5c17a60c1f86d3bb95cb5377bdf0430c740f90e7f73dee1292f4e30fa47ed210.svg) center no-repeat;
   background-size: 21px 25px;
+}
+
+.banner {
+  padding: 0 40px 40px;
+
+  video {
+    width: 100%;
+  }
 }
