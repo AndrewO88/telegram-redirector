@@ -36,7 +36,7 @@ import {ActivatedRoute} from '@angular/router';
 
 
         <div class="banner">
-          <a href="https://1link2020.com/1xtop" target="_blank">
+          <a href="https://cropped.xyz/oi6e2" target="_blank">
             <video [muted]="true" [autoplay]="true" [loop]="true" playsinline>
               <source src="/assets/images/1xwinter.mp4" type="video/mp4"/>
               <!--          <img src="video.gif" width="400" height="300"/>-->
