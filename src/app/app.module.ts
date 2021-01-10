@@ -17,7 +17,6 @@ import {RedirectModule} from './widgets/redirect/redirect.module';
 import {RoutingModule} from './routing/routing.module';
 import {TrustComponent} from './widgets/trust/trust.component';
 import {HttpClientModule} from '@angular/common/http';
-import {environment} from 'src/environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {MainPageComponent} from './widgets/_main-page/main-page/main-page.component';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -61,8 +60,15 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     RedirectModule,
     RoutingModule,
     HttpClientModule,
-    AngularFireModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp({
+      apiKey: 'AIzaSyCLGWDDRovMdZBmWd9-FTz5qLvkxY0_ofw',
+      authDomain: 'redirector-3f090.firebaseapp.com',
+      databaseURL: 'https://redirector-3f090-default-rtdb.firebaseio.com',
+      projectId: 'redirector-3f090',
+      storageBucket: 'redirector-3f090.appspot.com',
+      messagingSenderId: '1050627835576',
+      appId: '1:1050627835576:web:c78b0e8bece1343fb7964d'
+    }),
     AngularFireDatabaseModule,
     MatTabsModule,
     MatDialogModule,
