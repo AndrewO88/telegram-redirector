@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {DomSanitizer, SafeUrl, Title} from '@angular/platform-browser';
 import {interval, Observable} from 'rxjs';
 import {finalize, map, startWith, take} from 'rxjs/operators';
@@ -36,8 +36,8 @@ import {ActivatedRoute} from '@angular/router';
 
 
         <div class="banner">
-          <a href="http://1link2020.com/1xtop" target="_blank">
-            <video autoplay loop>
+          <a href="https://1link2020.com/1xtop" target="_blank">
+            <video [muted]="true" [autoplay]="true" [loop]="true" playsinline>
               <source src="/assets/images/1xwinter.mp4" type="video/mp4"/>
               <!--          <img src="video.gif" width="400" height="300"/>-->
             </video>
@@ -105,8 +105,6 @@ export class RedirectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log('ngOnInit', this.link);
-
     this.urlPath = this.route.snapshot.url[0].path;
     const pageTitle = this.link?.title + '' || this.urlPath;
     const ym = (window as any).ym;
@@ -114,7 +112,6 @@ export class RedirectorComponent implements OnInit {
     this.titleService.setTitle(pageTitle);
     ym(70790716, 'hit', this.urlPath, {title: pageTitle});
   }
-
 
   redirect(): void {
     const normal = !this.link?.personId;
