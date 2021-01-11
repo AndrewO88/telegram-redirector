@@ -85,7 +85,7 @@ export class RedirectComponent implements OnInit {
 
   ngOnInit(): void {
     this._initModel();
-    this._getDataFromTgPage(this.viewModel?.link?.title || '');
+    this._getDataFromTgPage(this.viewModel?.link);
   }
 
   private _initModel(): void {
@@ -105,7 +105,12 @@ export class RedirectComponent implements OnInit {
 
   }
 
-  private _getDataFromTgPage(channel: string): void {
+  private _getDataFromTgPage(link: Link | undefined): void {
+    if (!link) {
+      return;
+    }
+    const channel = link.getChannelFromLinkUrl();
+
     if (channel) {
       this.tg.membersCount$(channel).pipe(take(1)).subscribe((info) => {
         if (this.viewModel?.link) {

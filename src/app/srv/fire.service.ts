@@ -3,7 +3,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {from, Observable} from 'rxjs';
 import {filter, map, mergeMap, switchMap, take, toArray} from 'rxjs/operators';
 import {DocumentReference} from '@angular/fire/firestore/interfaces';
-import {ILink} from '../model/link';
+import {ILink, Link} from '../model/link';
 import {IPerson} from '../model/person';
 
 
@@ -17,11 +17,23 @@ export class FireService {
 
   getPersonLinks(personId: string | undefined): Observable<ILink[]> {
     return this.firestore.collection(`persons/${personId}/links`).snapshotChanges().pipe(
-      map<any, ILink[]>((data) => data.map((link: any) => ({
-        ...link.payload.doc.data() as object,
-        id: link.payload.doc.id,
-        personId
-      }))),
+      switchMap((list) => from(list).pipe(
+        filter((response) => !!response?.payload?.doc?.id && !!response?.payload?.doc?.data()),
+        filter((response) => {
+          const nativeLinkObject: any = response.payload.doc.data();
+          const {title, url} = nativeLinkObject;
+
+          return !!title || !!url;
+        }),
+        map((response) => {
+          const nativeLinkObject: ILink = response.payload.doc.data() as any;
+          const linkId = response.payload.doc.id;
+          const {title, url, count, img} = nativeLinkObject;
+
+          return new Link(linkId, title, url, count ?? 0, img);
+        }),
+        toArray()
+      )),
     );
   }
 
@@ -48,7 +60,7 @@ export class FireService {
       switchMap((persons) => from(persons).pipe(
         mergeMap((person) => this.getPersonLinks(person.id).pipe(take(1))),
         toArray(),
-        map((res: any[]) => res.flat())
+        map((res) => res.flat())
       )),
     );
   }
