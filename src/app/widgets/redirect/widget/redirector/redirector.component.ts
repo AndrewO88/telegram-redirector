@@ -35,14 +35,14 @@ import {ActivatedRoute} from '@angular/router';
         </div>
 
 
-        <div class="banner">
-          <a href="https://cropped.xyz/oi6e2" target="_blank">
-            <video [muted]="true" [autoplay]="true" [loop]="true" playsinline>
-              <source src="/assets/images/1xwinter.mp4" type="video/mp4"/>
-              <!--          <img src="video.gif" width="400" height="300"/>-->
-            </video>
-          </a>
-        </div>
+<!--        <div class="banner">-->
+<!--          <a href="https://cropped.xyz/oi6e2" target="_blank">-->
+<!--            <video [muted]="true" [autoplay]="true" [loop]="true" playsinline>-->
+<!--              <source src="/assets/images/1xwinter.mp4" type="video/mp4"/>-->
+<!--              &lt;!&ndash;          <img src="video.gif" width="400" height="300"/>&ndash;&gt;-->
+<!--            </video>-->
+<!--          </a>-->
+<!--        </div>-->
 
 
         <div class="tg-install">
