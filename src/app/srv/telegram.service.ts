@@ -16,7 +16,7 @@ export class TelegramService {
   membersCount$ = (channel: string): Observable<any> => this.getMembersCount(channel).pipe(
     startWith(null),
     filter((x) => !!x)
-  );
+  )
 
 
   // tslint:disable-next-line:typedef
@@ -26,7 +26,7 @@ export class TelegramService {
       'Access-Control-Allow-Origin': '*'
     });
 
-    return this.http.get(`https://api.teleg-on.online/?channel=${channel}`, {
+    return this.http.get(`//api.teleg-on.online/?channel=${channel}`, {
       headers
     });
   }
