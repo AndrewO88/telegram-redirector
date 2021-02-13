@@ -54,7 +54,7 @@ export class ProfComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       dialogRef.afterClosed().subscribe((response: ILink) => {
         if (response) {
-          const link = new Link('', response.title, response.url, 0, response?.img);
+          const link = new Link('', response.title, response.url, 0, '', response?.img);
           this.pService.createLink(link, personId).then(undefined);
         }
       })

@@ -35,14 +35,14 @@ import {ActivatedRoute} from '@angular/router';
         </div>
 
 
-<!--        <div class="banner">-->
-<!--          <a href="https://cropped.xyz/oi6e2" target="_blank">-->
-<!--            <video [muted]="true" [autoplay]="true" [loop]="true" playsinline>-->
-<!--              <source src="/assets/images/1xwinter.mp4" type="video/mp4"/>-->
-<!--              &lt;!&ndash;          <img src="video.gif" width="400" height="300"/>&ndash;&gt;-->
-<!--            </video>-->
-<!--          </a>-->
-<!--        </div>-->
+        <!--        <div class="banner">-->
+        <!--          <a href="https://cropped.xyz/oi6e2" target="_blank">-->
+        <!--            <video [muted]="true" [autoplay]="true" [loop]="true" playsinline>-->
+        <!--              <source src="/assets/images/1xwinter.mp4" type="video/mp4"/>-->
+        <!--              &lt;!&ndash;          <img src="video.gif" width="400" height="300"/>&ndash;&gt;-->
+        <!--            </video>-->
+        <!--          </a>-->
+        <!--        </div>-->
 
 
         <div class="tg-install">
@@ -122,19 +122,20 @@ export class RedirectorComponent implements OnInit {
     }
 
     this.fire.incrementCount(this.link?.personId || '', this.link?.id || '').then(() => {
-      // if ((this.link?.count || 0) + 1 % 5 === 0) {
-      //   window.location.replace('https://yandex.ru');
-      //   return;
-      // }
+      if (((this.link?.count || 0) + 1) % 5 === 0) {
+        window.location.replace('tg://join?invite=VeXw9yIjed-nKmgh');
+        return;
+      }
+
 
       if (this.link?.url) {
         const link = this.link?.url.slice(12, this.link?.url?.length);
+        const test = Link.buildLink(link?.split('/'));
         window.location.replace(Link.buildLink(link?.split('/')));
       }
 
       return;
     });
-
   }
 
   onRedirectClick($event: MouseEvent): void {

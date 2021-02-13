@@ -94,12 +94,11 @@ export class RedirectComponent implements OnInit {
     const links: ILink[] = this.route.snapshot.data.links ?? [];
     const link = links.find(l => l.title === info[1]);
     const isRegistered = !!link;
-
     this.viewModel = {
       isReceive: !info.filter(part => !!part).length,
       currentPathname: location.pathname,
       rootPathname: '/',
-      link: link ?? new Link('', '', Link.buildLink(info), 0, ''),
+      link: link ?? new Link('', '', Link.buildLink(info), 0, undefined, ''),
       isRegistered
     };
 

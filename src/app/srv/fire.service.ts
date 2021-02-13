@@ -29,8 +29,7 @@ export class FireService {
           const nativeLinkObject: ILink = response.payload.doc.data() as any;
           const linkId = response.payload.doc.id;
           const {title, url, count, img} = nativeLinkObject;
-
-          return new Link(linkId, title, url, count ?? 0, img);
+          return new Link(linkId, title, url, count ?? 0, personId, img);
         }),
         toArray()
       )),

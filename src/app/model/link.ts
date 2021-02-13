@@ -4,7 +4,7 @@ export interface ILink {
   title: string;
   url: string;
   img?: string;
-  personId?: string;
+  personId: string | undefined;
   logo?: string;
   subscribers?: number;
 
@@ -20,6 +20,7 @@ export class Link implements ILink {
   img?: string;
   count: number;
   logo?: string;
+  personId: string | undefined;
 
   static buildLink = (info: string[]): string => {
     let str: string;
@@ -45,7 +46,7 @@ export class Link implements ILink {
     }
 
     return str;
-  }
+  };
 
   static INIT = (link: string, collection: ILink[] = []): ILink => {
     const result: {
@@ -55,15 +56,16 @@ export class Link implements ILink {
       [cur.title]: cur
     }), {});
 
-    return result[link] ?? new Link('', '', link, 0, '');
+    return result[link] ?? new Link('', '', link, 0, '', '');
 
-  }
+  };
 
-  constructor(id: string, title: string, url: string, count: number, img?: string) {
+  constructor(id: string, title: string, url: string, count: number, personId: string | undefined, img?: string) {
     this.id = id;
     this.url = url;
     this.title = title;
     this.count = count;
+    this.personId = personId;
     this.img = img;
   }
 
